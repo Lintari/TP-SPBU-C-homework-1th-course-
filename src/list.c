@@ -1,104 +1,109 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #pragma once
 
-typedef struct ListElement{
+typedef struct ListElement {
     int value;
     struct ListElement* next;
-}ListElement;
+} ListElement;
 
-typedef struct HeadElement{
+typedef struct HeadElement {
     int len;
     ListElement* head;
-}HeadElement;
+} HeadElement;
 
-HeadElement* init (void){
-    HeadElement* s = malloc(sizeof(HeadElement));
-    if (s == NULL) return NULL;
-    s -> len = 0;
-    s -> head = NULL;
-    return s;
+HeadElement* init(void)
+{
+    HeadElement* list  = malloc(sizeof(HeadElement));
+    if (list == NULL)
+        return NULL;
+    list->len = 0;
+    list->head = NULL;
+    return list;
 }
 
-
-int  pop (HeadElement* s){
-    if (s -> len == 0) return -1;
-    ListElement* b;
-    b = s->head;
-    s->head = b->next;
-    free(b);
+int pop(HeadElement* list)
+{
+    if (list->len == 0)
+        return -1;
+    ListElement* newEl;
+    newEl = list->head;
+    list->head = newEl->next;
+    free(newEl);
     return 0;
 }
 
-void  push (HeadElement* s, int a){
-    ListElement* b;
-    b = s-> head;
-    if (s-> len == 0){
-	ListElement* q = malloc(sizeof(ListElement));
-	if (q == NULL) return ;
-	s ->head = q;
-	s -> len = 1;
-	q -> value = a;
-	q -> next = NULL;
+void push(HeadElement* list, int val)
+{
+    ListElement* pointer;
+    pointer = list->head;
+    if (list->len == 0) {
+        ListElement* newEl = malloc(sizeof(ListElement));
+        if (newEl == NULL)
+            return;
+        list->head = newEl;
+        list->len = 1;
+        newEl->value = val;
+        newEl->next = NULL;
+    } else {
+        while ((pointer->next) != NULL) {
+            pointer = pointer->next;
+        }
+        ListElement* newEl = malloc(sizeof(ListElement));
+        pointer->next = newEl;
+        newEl->next = NULL;
+        newEl->value = val;
+
+        list->len++;
     }
-    else{
-	while ((b->next)!= NULL){
-	    b = b->next;
-	}    
-	ListElement*q = malloc(sizeof(ListElement));
-	b-> next = q;
-	q-> next = NULL;
-	q-> value = a;
-    
-    s -> len ++;
-    }
-    
 }
 
-void  delete(HeadElement* s){
-    while (s-> len != 0){
-	pop(s);
+void delete(HeadElement* list)
+{
+    while (list->len != 0) {
+        pop(list);
     }
-    free(s);
+    free(list);
 }
-HeadElement*  connect (HeadElement* a, HeadElement* b){  
+HeadElement* connect(HeadElement* list1, HeadElement* list2)
+{
 
-    ListElement* c = a->head;
-    ListElement* d = b->head;
-    ListElement* e = a->head;	
+    ListElement* point11 = list1->head;
+    ListElement* point12 = list1->head;
+    ListElement* point21 = list2->head;
 
-    for (int i = 0; i< b->len-1; i++){ // где-то тут видимо говоря core bumped происходит. я не знаю где. вероятно где-то разыменовываю указатель нулевой
-	if (e->next == NULL || c->next == NULL || d-> next == NULL )  return a;
-	e = e->next; // по логике этот бро идет только по а
-	c->next = d;// вот здесь мы присоединяем указатель
-	c->next->next = e; // здесь мы снова возвращаемся в а
-	d = d->next;// этот бро идет только по b
+    for (int i = 0; i < list2->len - 1; i++) { // где-то тут видимо говоря core bumped происходит. я не знаю где. вероятно где-то разыменовываю указатель нулевой
+        if (point12->next == NULL || point11->next == NULL || point21->next == NULL)
+            return list1;
+        point12 = point12->next; // по логике этот бро идет только по list1
+        point11->next = point21; // вот здесь мы присоединяем указатель
+        point11->next->next = point12; // здесь мы снова возвращаемся в list1
+        point21 = point21->next; // этот бро идет только по list2
     }
-    return a;
-
+    return list1;
 }
-int main (void){
+int main(void)
+{
 
-    HeadElement* d = init();
-    HeadElement* q = init();
-    push(d,5);
-    push(d,7);
-    push(d,9);
-    push(q,6);
-    push(q,8);
-    //push(q,10);
-    ListElement* point = d->head;
-    for (int i  = 0; i< d->len; i++){
-	printf("%d ",  point->value );
-	point = point->next;
+    HeadElement* list1 = init();
+    HeadElement* list2 = init();
+    push(list1, 5);
+    push(list1, 7);
+    push(list1, 9);
+    push(list2, 6);
+    push(list2, 8);
+    // push(q,10);
+    ListElement* point = list1->head;
+    for (int i = 0; i < list1->len; i++) {
+        printf("%d ", point->value);
+        point = point->next;
     }
-    HeadElement* end = connect(d,q);
+    HeadElement* listEnd = connect(list1, list2);
 
-    point = end->head;
+    point = listEnd->head;
 
-    for (int i = 0; i<(d->len + q-> len); i++){
-	printf("%d", point-> value);
-	point = point -> next;
-
+    for (int i = 0; i < (list1->len + list2->len); i++) {
+        printf("%d", point->value);
+        point = point->next;
     }
 }
