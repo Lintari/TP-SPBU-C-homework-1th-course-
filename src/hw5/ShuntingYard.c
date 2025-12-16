@@ -5,8 +5,6 @@
 int change(char b)
 {
     if (b == "(")
-        return 5;
-    if (b == ")")
         return 4;
     if (b == "*")
         return 3;
@@ -19,16 +17,14 @@ int change(char b)
 
 char revChange(int b)
 {
-    if (b == 5)
-        return "(";
     if (b == 4)
-        return ")";
+        return "(";
     if (b == 3)
         return "*";
     if (b == 2)
         return "/";
     if (b == 1)
-        return "+" return;
+        return "+" ;
     return "-";
 }
 
@@ -44,19 +40,19 @@ int main(void)
             if (a == "(")
                 push(opStack, change(a));
             else {
-		
+		while( 
             } // пройтись по стеку и вывести все до открывающей скобки 
         } else if (a[i] != "*" && a[i] != "+" && a[i] != "-" && a[i] != "/") { //
             printf("%d", a[i]);
         }
 
         else {
-	    if (opStack -> len == 0 )
-            if (a[i] == z "*" || a[i] == "/") { // эти операции имеют более высокий приоритет а значит просто добавляются в стек
-		
-            }
-	     else {  в противном случае выводим данный знак
-            
+	    if (getLen(opStack) == 0 ) push( opStack, change(a[i]);  
+            else{
+		 if ( change(a[i]) / 2 >= peek(opStack)) {
+		    printf( "%c", a[i]);
+}
+		else push(opStack, change(a[i]);
 	    }
         }
         printf("%c", a[i]);
@@ -64,9 +60,9 @@ int main(void)
     }
 
     ListElement* pointer = opStack->head;// выводим остатки стека.
-    for (int i = 0; i < opStack->len; i++) {
-        printf("%c", revChange(pointer->value));
-        pointer = pointer->next;
+    for (int i = 0; i < getLen(opStack); i++) {
+        printf("%c", revChange(getValue(pointer)));
+        pointer = nextElm(pointer);
         return 0;
     }
 }
