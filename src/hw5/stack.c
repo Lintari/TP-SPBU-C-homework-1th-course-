@@ -64,6 +64,11 @@ ListElement* nextElm (ListElement* a){
     return a-> next;
 }
 
+ListElement* getHead (headStack* a){
+    return a-> head; 
+
+}
+
 void deleteStack (headStack* a){
     while (a->len > 0){
 	pop(a);
