@@ -56,6 +56,13 @@ int getLen (headStack* a){
     return a->len;
 }
 
+int getValue (ListElement* a){
+    return a->value; 
+}
+
+ListElement* nextElm (ListElement* a){
+    return a-> next;
+}
 
 void deleteStack (headStack* a){
     while (a->len > 0){

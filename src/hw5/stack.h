@@ -4,7 +4,7 @@ typedef  struct ListElement ListElement;
 typedef struct headStack headStack;
 
 
-void  push (headStack*, char ); 
+void  push (headStack*, int); 
 
 int  pop (headStack*);
 
@@ -17,3 +17,5 @@ headStack* newStack (void);
 void deleteStack ( headStack*);
 
 int getLen (headStack*);
+int getValue (ListElement*);
+ListElement* nextElm (ListElement*);
