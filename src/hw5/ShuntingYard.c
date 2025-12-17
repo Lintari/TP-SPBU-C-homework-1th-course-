@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-int change(char b)
+int change(char b) // две функции для того чтобы хранить в стеке операторы
 {
-    if (b == "(")
-        return 4;
-    if (b == "*")
+    if (b == '(')
+        return -4;
+    if (b == '*')
         return 3;
-    if (b == "/")
+    if (b == '/')
         return 2;
-    if (b == "+")
+    if (b == '+')
         return 1;
     return 0;
 }
@@ -18,51 +18,57 @@ int change(char b)
 char revChange(int b)
 {
     if (b == 4)
-        return "(";
+        return '(';
     if (b == 3)
-        return "*";
+        return '*';
     if (b == 2)
-        return "/";
+        return '/';
     if (b == 1)
-        return "+" ;
-    return "-";
+        return '+';
+    return '-';
 }
 
 int main(void)
 {
-    headStack* opStack = newStack();
-    char a[] = "2+9*(5-3*7)";
+    headStack* opStack = newStack(); //  объявили стек операторов
+    char a[] = "2+3*(2-1/5)";
     int i = 0;
-    // printf("%ld", strlen(a));
-
-    while (i < strlen(a)) {
-        if (a == "(" || a == ")") {
-            if (a == "(")
-                push(opStack, change(a));
+    ListElement* pointer;
+    printf("\n");
+    while (i < strlen(a)) { //
+        if ((a[i] == '(') || (a[i] == ')')) {
+            if ((a[i] == '('))
+                push(opStack, change(a[i]));
             else {
-		while( 
-            } // пройтись по стеку и вывести все до открывающей скобки 
-        } else if (a[i] != "*" && a[i] != "+" && a[i] != "-" && a[i] != "/") { //
-            printf("%d", a[i]);
+                pointer = getHead(opStack);
+                while (getValue(getHead(opStack)) != -4) { //  выводим все что было внутри скобок вплоть до открывающей
+                    printf("%c", revChange(getValue(pointer)));
+                    pop(opStack);
+                }
+                pop(opStack);
+            }
+
+        } else if (a[i] != '*' && a[i] != '+' && a[i] != '-' && a[i] != '/') { //
+            printf("%c", a[i]);
         }
 
         else {
-	    if (getLen(opStack) == 0 ) push( opStack, change(a[i]);  
-            else{
-		 if ( change(a[i]) / 2 >= peek(opStack)) {
-		    printf( "%c", a[i]);
-}
-		else push(opStack, change(a[i]);
-	    }
+            if (getLen(opStack) == 0)
+                push(opStack, change(a[i]));
+            else {
+                if ((change(a[i]) / 2) >= (peek(opStack) / 2)) { // проверяем operator presedence
+                    push(opStack, change(a[i]));
+                } else
+                    printf("%c", a[i]);
+            }
         }
-        printf("%c", a[i]);
         i++;
     }
 
-    ListElement* pointer = opStack->head;// выводим остатки стека.
+    pointer = getHead(opStack); // выводим остатки стека.
     for (int i = 0; i < getLen(opStack); i++) {
         printf("%c", revChange(getValue(pointer)));
         pointer = nextElm(pointer);
-        return 0;
     }
+    return 0;
 }
