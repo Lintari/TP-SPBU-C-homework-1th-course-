@@ -19,3 +19,4 @@ void deleteStack ( headStack*);
 int getLen (headStack*);
 int getValue (ListElement*);
 ListElement* nextElm (ListElement*);
+ListElement* getHead (headStack*);

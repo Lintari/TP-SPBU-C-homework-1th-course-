@@ -28,7 +28,7 @@ void push ( headStack* stack , int b){
 
 int  pop (headStack* a){
     if (a-> len == 0){
-	return -1; // tyu dolbaeb
+	return -1; 
     }
     ListElement* b;
     b = a->head;
@@ -62,6 +62,11 @@ int getValue (ListElement* a){
 
 ListElement* nextElm (ListElement* a){
     return a-> next;
+}
+
+ListElement* getHead (headStack* a){
+    return a-> head; 
+
 }
 
 void deleteStack (headStack* a){
