@@ -12,45 +12,45 @@ typedef struct headList {
     ListElement* head;
 } headList;
 
+typedef struct ListElement* ListIter;
 
-typedef struct ListElement* ListIter; 
-
-
-ListIter  getPoint (headList* list, int index){
-    ListIter p = list-> head->next;
-    if (index == 0) return NULL;
-    for(int i = 0; i<index; i++) p = p->next;
+ListIter getPoint(headList* list, int index)
+{
+    ListIter p = list->head->next;
+    if (index == 0)
+        return NULL;
+    for (int i = 0; i < index; i++)
+        p = p->next;
     return p;
-
 }
 
-ListIter listNext (ListIter p){ // функция понадобится в основной части кода
+ListIter listNext(ListIter p)
+{ // функция понадобится в основной части кода
     return p->next;
 }
 
-
 void insert(headList* list, int val, ListIter p)
-{ // на входе получили указатель, значение, и iter after which we should put 
+{ // на входе получили указатель, значение, и iter after which we should put
     ListElement* newEl = malloc(sizeof(ListElement));
-    if (newEl == NULL) return ;
-    list ->len ++;
-    newEl ->next = p ->next;
-    newEl -> value = val;
+    if (newEl == NULL)
+        return;
+    list->len++;
+    newEl->next = p->next;
+    newEl->value = val;
     p->next = newEl;
 }
 
 void removee(headList* list, ListIter p) // iter elemts after we should pop
 {
-    ListElement* b; 
-    if (p->next == NULL){
-	printf("вы пытаетесь удалить несуществующий элемент");
-    return ;
-}
+    ListElement* b;
+    if (p->next == NULL) {
+        printf("вы пытаетесь удалить несуществующий элемент");
+        return;
+    }
     b = p->next;
     p->next = p->next->next;
-    list->len --;
+    list->len--;
     free(b);
-    
 }
 
 headList* newList(void)
@@ -67,29 +67,32 @@ headList* newList(void)
 
 void deleteList(headList* list)
 {
-    while(list->len != 0){
-	removee(list, 0);
+    while (list->len != 0) {
+        removee(list, 0);
     }
     free(list);
 }
 
-int get( ListIter p)
+int get(ListIter p)
 {
     return p->value;
 }
 
-void showList (headList* list){
+void showList(headList* list)
+{
     ListIter p = list->head->next;
-    for(int i = 1; i< list->len+1; i++){
-	printf("%d ", p->value);
-	p = p->next;
+    for (int i = 1; i < list->len + 1; i++) {
+        printf("%d ", p->value);
+        p = p->next;
     }
 }
 
-int getLen (headList* list){
+int getLen(headList* list)
+{
     return list->len;
 }
 
-ListElement* getHead ( headList* list){
+ListElement* getHead(headList* list)
+{
     return list->head;
 }
