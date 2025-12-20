@@ -32,32 +32,38 @@ headList* newList(void)
     return list;
 }
 
+/**
+* @brief функция вставки элемента. 
+* @note функция вставляет значение после итератора. Также отдельно рассматривается случай вставки первого элементп
+*/
+
 void insert(headList* list, int val, ListIter p)
-{ // как и в обычном списке вставляем после Итератора
+{ 
     ListElement* newEl = malloc(sizeof(ListElement));
     if (newEl == NULL)
         return;
-    if (list->head == p) { // отдельно момент если мы вставляем первый настоящий элемент в список
-        // printf("I' VE BEEN HERE");
+    if (list->head == p) { 
         p->next = newEl;
         newEl->next = newEl;
         list->len++;
         newEl->value = val;
         return;
     }
-    // printf("I've been here    ");
     newEl->next = p->next;
     newEl->value = val;
     p->next = newEl;
     list->len++;
 }
-
+/**
+* @brief функция удаления элемента. 
+* @note Отдельно рассматриваем случай когда мы удаляем элемент, с которым связана голова списка
+*/
 void removee(headList* list, ListIter p)
 {
     ListElement* b;
     b = p->next;
-    if (p->next == list->head->next) { // значит мы удаляем файл на который указывает нулевой элемент.
-        list->head->next = p; //  переместили голову.
+    if (p->next == list->head->next) { 
+        list->head->next = p;
     }
     p->next = p->next->next;
     list->len--;
@@ -82,7 +88,7 @@ ListIter getHead(headList* list)
 
 ListIter getHeadHead(headList* list)
 {
-    return list->head; // понадобится в основной части кода
+    return list->head; 
 }
 
 void showList(headList* list)

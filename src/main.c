@@ -1,6 +1,10 @@
 #include "CycleList.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+/*
+*@brief  удаляем удаляет следующий по счету m - ый элемент
+*/
 void pop(headList* list, ListIter p, int m)
 {
     for (int i = 0; i < m - 1; i++) {
@@ -9,13 +13,19 @@ void pop(headList* list, ListIter p, int m)
     removee(list, p);
 }
 
+/**
+* @param n  количество воинов
+* @param m  какого по счету убивают 
+* @return последнего оставшегося
+*/
+
 int main(void)
 {
-    int n, m; // n - общее количество воинов   m - какого по счету убивают
+    int n, m;
     scanf("%d %d", &n, &m);
     headList* list = newList();
     ListIter p = getHead(list);
-    for (int i = 1; i <= n; i++) { // сгенерировали список.
+    for (int i = 1; i <= n; i++) { 
         insert(list, i, p);
         p = nextPoint(p);
     }
@@ -24,6 +34,6 @@ int main(void)
         pop(list, p, m);
     }
     printf("\n");
-    showList(list); // вернули позицию
+    showList(list); 
     return get(p);
 }
