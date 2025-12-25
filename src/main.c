@@ -2,38 +2,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*
-*@brief  удаляем удаляет следующий по счету m - ый элемент
-*/
-void pop(headList* list, ListIter p, int m)
+ListIter pop(List* list, ListIter p, int m) // функция удаления следующего m-го элемента
 {
     for (int i = 0; i < m - 1; i++) {
         p = nextPoint(p);
     }
-    removee(list, p);
+    removeEl(list, p);
+    return p;
 }
 
-/**
-* @param n  количество воинов
-* @param m  какого по счету убивают 
-* @return последнего оставшегося
-*/
-
-int main(void)
+int main(void) // будем последовательно удалять все элементы из списка пока в нем не останется один элемент. затем мы выводим список.
 {
-    int n, m;
+    int n, m; // n-  общее количетсво воинов, m - интервал убийства.
     scanf("%d %d", &n, &m);
-    headList* list = newList();
+    List* list = newList();
     ListIter p = getHead(list);
-    for (int i = 1; i <= n; i++) { 
+    insert(list, 1, p);
+    p = getHead(list);
+    for (int i = 2; i <= n; i++) { //  заполнили список
         insert(list, i, p);
         p = nextPoint(p);
     }
-    p = getHeadHead(list);
-    while (getLen(list) != 1) {
-        pop(list, p, m);
+
+    while (getLen(list) != 1) { //  удалили все элементы пока не остался 1
+        p = pop(list, p, m);
     }
+
     printf("\n");
-    showList(list); 
-    return get(p);
+    showList(list); // вывели тот самый 1 элемент
+    return 0;
 }
