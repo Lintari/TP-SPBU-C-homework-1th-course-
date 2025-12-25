@@ -1,22 +1,23 @@
 #pragma once
 
 typedef  struct ListElement ListElement; 
-typedef struct headStack headStack;
+typedef struct Stack Stack;
 
 
-void  push (headStack*, int); 
+void  push (Stack*, int); 
 
-int  pop (headStack*);
-
-
-int peek (headStack*);
-
-headStack* newStack (void);
+int  pop (Stack*);
 
 
-void deleteStack ( headStack*);
+int peek (Stack*);
 
-int getLen (headStack*);
+Stack* newStack (void);
+
+
+void deleteStack ( Stack*);
+
+int getLen (Stack*);
 int getValue (ListElement*);
 ListElement* nextElm (ListElement*);
-ListElement* getHead (headStack*);
+ListElement* getHead (Stack*);
+

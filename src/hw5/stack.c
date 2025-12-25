@@ -9,70 +9,70 @@ typedef struct ListElement {
 
 } ListElement;
 
-typedef struct headStack{
+typedef struct Stack{
     int len;
     ListElement* head; 
 
-}headStack;
+}Stack;
 
 
-void push ( headStack* stack , int b){
-    ListElement* a  = malloc(sizeof(ListElement));
-    if (a == NULL) return ;
-    a -> value = b;
-    a -> next = stack-> head; 
-    stack -> head = a;
+void push ( Stack* stack , int val){
+    ListElement* newEl  = malloc(sizeof(ListElement));
+    if (newEl == NULL) return ;
+    newEl -> value = val;
+    newEl -> next = stack-> head; 
+    stack -> head = newEl;
     stack -> len ++;
 }
 
 
-int  pop (headStack* a){
-    if (a-> len == 0){
+int  pop (Stack* stack){
+    if (stack-> len == 0){
 	return -1; 
     }
-    ListElement* b;
-    b = a->head;
-    a-> head = b-> next;
-    free(b);
-    a -> len --;
+    ListElement* val;
+    val = stack->head;
+    stack-> head = val-> next;
+    free(val);
+    stack -> len --;
     return 0;
 }
 
-int peek (headStack* a){
-    if( a-> len == 0) return -1;
-    return a->head-> value;
+int peek (Stack* stack){
+    if( stack-> len == 0) return -1;
+    return stack->head-> value;
 
 }
 
-headStack* newStack (void){
-    headStack* stack  = malloc(sizeof(headStack));
+Stack* newStack (void){
+    Stack* stack  = malloc(sizeof(Stack));
     if (stack == NULL) return NULL;
     stack -> len = 0;
     stack -> head = NULL;
     return stack;
 }
 
-int getLen (headStack* a){
-    return a->len;
+int getLen (Stack* stack){
+    return stack->len;
 }
 
-int getValue (ListElement* a){
-    return a->value; 
+int getValue (ListElement* element){
+    return element->value; 
 }
 
-ListElement* nextElm (ListElement* a){
-    return a-> next;
+ListElement* nextElm (ListElement* element){
+    return element-> next;
 }
 
-ListElement* getHead (headStack* a){
-    return a-> head; 
+ListElement* getHead (Stack* stack){
+    return stack-> head; 
 
 }
 
-void deleteStack (headStack* a){
-    while (a->len > 0){
-	pop(a);
+void deleteStack (Stack* stack){
+    while (stack->len > 0){
+	pop(stack);
 }
-    free(a);
+    free(stack);
 }
 
