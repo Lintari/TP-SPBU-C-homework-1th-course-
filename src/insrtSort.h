@@ -1,22 +1,22 @@
 #pragma once
 
 typedef struct ListElement ListElement;
-typedef struct headList headList;
+typedef struct List List;
 typedef struct ListElement* ListIter;
 
-ListIter getPoint(headList*, int);
+ListIter getPoint(List*, int);
 ListIter listNext(ListIter);
-void insert(headList*, int, ListIter);
-void removee(headList*, ListIter);
+void insert(List*, int, ListIter);
+void removeEl(List*, ListIter);
 
-headList* newList(void);
+List* newList(void);
 
-void deleteList(headList*);
+void deleteList(List*);
 
 int get(ListIter);
 
-void showList(headList*);
+void showList(List*);
 
-int getLen(headList*);
+int getLen(List*);
 
-ListElement* getHead(headList*);
+ListElement* getHead(List*);

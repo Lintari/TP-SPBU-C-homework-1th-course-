@@ -2,21 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void push(headList* list, int a)
+void push(List* list, int a)
 {
-    ListIter p = getHead(list);
-    while (p != NULL && listNext(p) != NULL && get(listNext(p)) < a) {
-        p = listNext(p);
+    ListIter iter = getHead(list);
+    while (iter != NULL && listNext(iter) != NULL && get(listNext(iter)) < a) {
+        iter = listNext(iter);
     }
-    insert(list, a, p);
+    insert(list, a, iter);
 }
 
-void pop(headList* list, int a)
+void pop(List* list, int a)
 {
-    ListIter p = getHead(list);
-    while (listNext(p) != NULL && get(listNext(p)) != a)
-        p = listNext(p);
-    removee(list, p);
+    ListIter iter = getHead(list);
+    while (listNext(iter) != NULL && get(listNext(iter)) != a)
+        iter = listNext(iter);
+    removeEl(list, iter);
 }
 
 int main(void)
@@ -24,7 +24,7 @@ int main(void)
     int a = -1;
     int b = 0;
     printf("new stroke\n");
-    headList* list = newList();
+    List* list = newList();
     while (a != 0) {
         scanf("%d", &a);
         if (a == 1) { // insert
