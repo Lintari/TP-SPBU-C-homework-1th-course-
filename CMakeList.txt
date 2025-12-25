@@ -1,9 +1,0 @@
-cmake_minimum_required(VERSION 4.0)
-project(C is killing)
-set(CMAKE_C_STANDART 99)
-set(CMAKE_C<STANDART_REQUIRED ON)
-add_compile_options(-Wall -Wextra -Wpedantic)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
-
-add_subdirectory(src)
