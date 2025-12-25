@@ -30,9 +30,9 @@ typedef struct ListElement* ListIter;
  * @brief  функция получения указателя на следующий элемент списка
  * @param p  Итератор, указывающий на действующий элемент
  */
-ListIter nextPoint(ListIter p)
+ListIter nextPoint(ListIter iter)
 {
-    return p->next;
+    return iter->next;
 }
 /**
  * @brief  функция инициализации нового списка
@@ -56,7 +56,7 @@ List* newList(void)
  * @warining  Передаваемый итератор должен указывать на существующий элемент списка
  * @note  После успешной вставки размер списка увеличивается на 1 и выделяется память под новый элемент.
  */
-void insert(List* list, int val, ListIter p)
+void insert(List* list, int val, ListIter iter)
 {
     ListElement* newEl = malloc(sizeof(ListElement));
     if (newEl == NULL)
@@ -69,9 +69,9 @@ void insert(List* list, int val, ListIter p)
         return;
     }
     // стандартный случай
-    newEl->next = p->next;
+    newEl->next = iter->next;
     newEl->value = val;
-    p->next = newEl;
+    iter->next = newEl;
     list->len++;
 }
 
@@ -81,14 +81,14 @@ void insert(List* list, int val, ListIter p)
  * @param p  Итератор, указывающий  на элемент списка после которого будет вставлен элемент
  * @note  После успешного удаления размер списка уменьшается на 1 и значение удаленного элемента стирается из памяти
  */
-void removeEl(List* list, ListIter p)
+void removeEl(List* list, ListIter iter)
 {
     ListElement* b;
-    b = p->next;
+    b = iter->next;
     if (b == list->head) { // значит мы хотим удалить элемент на который указывает голова. перенесем указатель головы
-        list->head = p;
+        list->head = iter;
     }
-    p->next = p->next->next;
+    iter->next = iter->next->next;
     list->len--;
     free(b);
 }
@@ -97,9 +97,9 @@ void removeEl(List* list, ListIter p)
  * @brief функция получения значения по указателю
  * @param p Итератор, указывающий на необходимый нам обхект
  */
-int get(ListIter p)
+int get(ListIter iter)
 {
-    return p->value;
+    return iter->value;
 }
 
 /**
@@ -127,9 +127,9 @@ ListIter getHead(List* list)
  */
 void showList(List* list)
 {
-    ListIter p = list->head;
+    ListIter iter  = list->head;
     for (int i = 0; i < list->len; i++) {
-        printf("%d ", p->value);
-        p = p->next;
+        printf("%d ", iter->value);
+        iter = iter->next;
     }
 }
