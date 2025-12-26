@@ -25,7 +25,6 @@ typedef struct List {
  */
 typedef struct ListElement* ListIter;
 
-
 /**
  * @brief  функция получения указателя на следующий элемент списка
  * @param p  Итератор, указывающий на действующий элемент
@@ -127,7 +126,7 @@ ListIter getHead(List* list)
  */
 void showList(List* list)
 {
-    ListIter iter  = list->head;
+    ListIter iter = list->head;
     for (int i = 0; i < list->len; i++) {
         printf("%d ", iter->value);
         iter = iter->next;

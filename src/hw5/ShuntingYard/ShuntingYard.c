@@ -51,16 +51,16 @@ int main(void)
                 while (getValue(getHead(opStack)) != -4) { //  выводим все что было внутри скобок вплоть до открывающей
                     printf("%c", decode(getValue(pointer)));
                     pop(opStack); // не забываем в процессе удалять содерживмое стека
-		    pointer = getHead(opStack);
+                    pointer = getHead(opStack);
                 }
                 pop(opStack);
             }
 
-        } else if (isOp(a[i]) == 0) { // если символ 
+        } else if (isOp(a[i]) == 0) { // если символ
             printf("%c", a[i]);
         }
 
-        else { // если оператор но не скобки 
+        else { // если оператор но не скобки
             if (getLen(opStack) == 0)
                 push(opStack, encode(a[i]));
             else {
