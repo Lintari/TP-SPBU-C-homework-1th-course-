@@ -9,7 +9,7 @@ void sort(int* arr, int left, int right)
     int pivot = arr[right]; //
     int index = left - 1;
     int lVal = left;
-    while (lVal <= right) { // lVal is green one  and index is orange one
+    while (lVal <= right) {
         if (arr[lVal] > pivot)
             lVal++;
         else {
