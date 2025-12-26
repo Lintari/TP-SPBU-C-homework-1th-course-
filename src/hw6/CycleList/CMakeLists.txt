@@ -1,6 +1,6 @@
 
-add_executable(insertSort  
+add_executable(countMash 
     main.c 
-    insertSort.c 
-    insrtSort.h
+    CountingMashine.c 
+    CycleList.h
     )
