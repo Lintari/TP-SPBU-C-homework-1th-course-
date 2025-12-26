@@ -39,12 +39,12 @@ int main(void)
 {
     Stack* opStack = newStack(); //  объявили стек операторов
     char a[] = "2+3*(1-5/3+6+7-)";
-    int i = 0;
+    size_t i = 0;
     ListElement* pointer;
     printf("\n");
     while (i < strlen(a)) { //
         if ((a[i] == '(') || (a[i] == ')')) { // если скобки
-            if ((a[i] == '('))
+            if (a[i] == '(')
                 push(opStack, encode(a[i]));
             else {
                 pointer = getHead(opStack);
