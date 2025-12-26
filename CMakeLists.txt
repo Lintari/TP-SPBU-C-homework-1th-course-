@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(proj C)
+project(proj C ASM)
 set(CMAKE_C_STANDART 99)
 set(CMAKE_C_STANDART_REQUIRED ON)
 add_compile_options(-Wall -Wextra -Wpedantic)
