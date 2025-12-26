@@ -1,3 +1,5 @@
 add_subdirectory(hw5/RightBrackets)
 add_subdirectory(hw5/ShuntingYard)
 add_subdirectory(hw5/stack)
+add_subdirectory(hw6/SortList)
+add_subdirectory(hw6/CycleList)
